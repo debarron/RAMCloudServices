@@ -11,7 +11,7 @@ fi
 
 for ip in $(cat "${RAMCLOUD_HOME}/conf/coordinators")
 do
-  script="${RAMCLOUD_HOME}/sbin/start-deamon.sh ${RAMCLOUD_HOME}/obj.master/coordinator -C ${RAMCLOUD_PROTOCOL}:host=${ip},port=${RAMCLOUD_COORD_PORT} -x ${RAMCLOUD_ZOOKEEPER_LEADER}"
+  script="${RAMCLOUD_HOME}/sbin/start-daemon.sh ${RAMCLOUD_HOME}/obj.master/coordinator -C ${RAMCLOUD_PROTOCOL}:host=${ip},port=${RAMCLOUD_COORD_PORT} -x ${RAMCLOUD_ZOOKEEPER_LEADER}"
 
   ssh $ip "${script}" 
 done

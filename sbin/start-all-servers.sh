@@ -22,7 +22,7 @@ R="$4"
 
 for ip in $(cat "${RAMCLOUD_HOME}/conf/servers")
 do
-  script="${RAMCLOUD_HOME}/sbin/start-deamon.sh ${RAMCLOUD_HOME}/obj.master/server -L ${RAMCLOUD_PROTOCOL}:host=${ip},port=${RAMCLOUD_SERVER_PORT} -x ${RAMCLOUD_ZOOKEEPER_LEAADER} --totalMasterMemory ${MEMORY} -f ${BACKUP_FILE} --segmentFrames ${SEGMENT_FRAMES} -r ${R}"
+  script="${RAMCLOUD_HOME}/sbin/start-daemon.sh ${RAMCLOUD_HOME}/obj.master/server -L ${RAMCLOUD_PROTOCOL}:host=${ip},port=${RAMCLOUD_SERVER_PORT} -x ${RAMCLOUD_ZOOKEEPER_LEAADER} --totalMasterMemory ${MEMORY} -f ${BACKUP_FILE} --segmentFrames ${SEGMENT_FRAMES} -r ${R}"
   
   ssh $ip "${script}"
 done
