@@ -1,11 +1,17 @@
 #!/bin/bash
 
-RCSERVICES_HOME="/users/dl544/graph-db-project/RAMCloudServices/"
-ZK_HOME="/users/dl544/graph-db-project/zookeeper/"
+if [ -z "$RAMCLOUD_HOME" ]
+then
+  echo "## ERROR"
+  echo "The RAMCLOUD_HOME env variable is not defined"
+  exit 1
+fi
 
-for ip in $(cat "$RCSERVICES_HOME/coordinators" "$RCSERVICES_HOME/servers")
+. "${RAMCLOUD_HOME}/conf/ramcloud-env.sh"
+
+for ip in $(cat "${RAMCLOUD_HOME}/conf/coordinators" "${RAMCLOUD_HOME}/conf/servers")
 do
-  ssh $ip "$ZK_HOME/bin/zkServer.sh start"
+  ssh $ip "$RAMCLOUD_ZOOKEEPER_HOME/bin/zkServer.sh start"
 done
 
 exit 0

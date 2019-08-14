@@ -5,6 +5,13 @@ if [ "$#" -ne 3 ]; then
   exit 1
 fi
 
+if [ -z "$RAMCLOUD_HOME" ]
+then
+  echo "## ERROR"
+  echo "The RAMCLOUD_HOME env variable is not defined"
+  exit 1
+fi
+
 MEMORY_MB="$1"
 BACKUP_FILE="$2"
 R="$3"

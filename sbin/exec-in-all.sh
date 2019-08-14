@@ -1,10 +1,23 @@
 #!/bin/bash
 
-CMD="$1"
-RCSERVICES_HOME="/users/dl544/graph-db-project/RAMCloudServices/"
-ZK_HOME="/users/dl544/graph-db-project/zookeeper/"
+if [ -z "$RAMCLOUD_HOME" ]
+then
+  echo "## ERROR"
+  echo "Make sure to set RAMCLOUD_HOME env variable to RAMCloud's install directory"
+  exit 1
+fi
 
-for ip in $(cat "$RCSERVICES_HOME/coordinators" "$RCSERVICES_HOME/servers")
+RAMCLOUD_CONF="$RAMCLOUD_HOME/conf"
+
+if [ ! -d "$RAMCLOUD_CONF" ]
+then
+  echo "## ERROR "
+  echo "Directory $RAMCLOUD_CONF does not exists, install the RAMCloudServices repository in order to continue"
+  exit 1
+fi
+
+CMD="$1"
+for ip in $(cat "$RAMCLOUD_CONF/coordinators" "$RAMCLOUD_CONF/servers")
 do
   ssh $ip "$CMD"
 done

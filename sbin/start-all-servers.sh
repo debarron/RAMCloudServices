@@ -6,16 +6,23 @@ if [ "$#" -ne 4 ]; then
   exit 1
 fi
 
+if [ -z "$RAMCLOUD_HOME" ]
+then
+  echo "## ERROR"
+  echo "The RAMCLOUD_HOME env variable is not defined"
+  exit 1
+fi
+
 MEMORY="$1"
 BACKUP_FILE="$2"
 SEGMENT_FRAMES="$3"
 R="$4"
 
-. $RAMCLOUD_HOME/conf/ramcloud-env.sh
+. "${RAMCLOUD_HOME}/conf/ramcloud-env.sh"
 
-for ip in $(cat "$RAMCLOUD_SERVERS")
+for ip in $(cat "${RAMCLOUD_HOME}/conf/servers")
 do
-  script="${GRAPH_DB_HOME}/RAMCloudServices/start-deamon.sh ${RAMCLOUD_HOME}/obj.master/server -L $RAMCLOUD_PROTOCOL:host=${ip},port=${RAMCLOUD_SERVER_PORT} -x ${RAMCLOUD_ZOOKEEPER_LEAADER} --totalMasterMemory ${MEMORY} -f ${BACKUP_FILE} --segmentFrames ${SEGMENT_FRAMES} -r ${R}"
+  script="${RAMCLOUD_HOME}/sbin/start-deamon.sh ${RAMCLOUD_HOME}/obj.master/server -L ${RAMCLOUD_PROTOCOL}:host=${ip},port=${RAMCLOUD_SERVER_PORT} -x ${RAMCLOUD_ZOOKEEPER_LEAADER} --totalMasterMemory ${MEMORY} -f ${BACKUP_FILE} --segmentFrames ${SEGMENT_FRAMES} -r ${R}"
   
   ssh $ip "${script}"
 done

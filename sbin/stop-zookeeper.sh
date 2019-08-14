@@ -1,22 +1,18 @@
 #!/bin/bash
 
-. "${GRAPH_DB_HOME}"/RAMCloudServices/ramcloud-env.sh
+if [ -z "$RAMCLOUD_HOME" ]
+then
+  echo "## ERROR"
+  echo "The RAMCLOUD_HOME env variable is not defined"
+  exit 1
+fi
 
-echo "# Terminating with all coordinators"
-for ip in $(cat "${RAMCLOUD_COORDS}")
+. "${RAMCLOUD_HOME}"/conf/ramcloud-env.sh
+
+for ip in $(cat "${RAMCLOUD_HOME}/conf/coordinators" "${RAMCLOUD_HOME}/conf/servers")
 do
-  script="${GRAPH_DB_HOME}/zookeeper/bin/zkServer.sh stop"
+  script="${RAMCLOUD_ZOOKEEPER_HOME}/bin/zkServer.sh stop"
   ssh $ip "${script}" > /dev/null
 done
-echo "# Done"
-echo " "
-
-echo "# Terminating with all servers"
-for ip in $(cat "${RAMCLOUD_SERVERS}")
-do
-  script="${GRAPH_DB_HOME}/zookeeper/bin/zkServer.sh stop"
-  ssh $ip "${script}"  > /dev/null
-done
-echo "# Done"
 
 exit 0
