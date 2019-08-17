@@ -11,7 +11,7 @@ fi
 
 for ip in $(cat "${RAMCLOUD_HOME}/conf/coordinators" "${RAMCLOUD_HOME}/conf/servers")
 do
-  script="${RAMCLOUD_ZOOKEEPER_HOME}/bin/zkServer.sh stop"
+  script="${RAMCLOUD_HOME}/zookeeper/bin/zkServer.sh stop"
   ssh $ip "${script}" > /dev/null
 done
 
