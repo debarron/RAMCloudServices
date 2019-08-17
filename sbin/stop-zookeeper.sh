@@ -11,7 +11,7 @@ fi
 
 for ip in $(cat "${RAMCLOUD_HOME}/conf/coordinators" "${RAMCLOUD_HOME}/conf/servers")
 do
-  script="${RAMCLOUD_HOME}/zookeeper/bin/zkServer.sh stop"
+  script="kill -9 \$(jps -lm | grep zookeeper | cut -d' ' -f1)"
   ssh $ip "${script}" > /dev/null
 done
 
