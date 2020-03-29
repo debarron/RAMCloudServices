@@ -1,4 +1,4 @@
-This repository has been integrates to <a href="github.com/debarron/RAMCloud">debarron/RAMCloud</a>
+This repository has been integrates to <a href="https://github.com/debarron/RAMCloud">debarron/RAMCloud</a>
 
 # RAMCloudServices
 
