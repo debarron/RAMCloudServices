@@ -1,3 +1,5 @@
+This repository has been integrates to <a href="github.com/debarron/RAMCloud">debarron/RAMCloud</a>
+
 # RAMCloudServices
 
 This repositiory contains a set of scripts to manage a <a href="https://github.com/PlatformLab/RAMCloud">RAMCloud repository</a>.
